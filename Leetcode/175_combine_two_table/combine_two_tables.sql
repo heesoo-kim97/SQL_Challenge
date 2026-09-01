@@ -1,1 +1,8 @@
-use Leetcode;
+SELECT
+    p.firstName,
+    p.lastName,
+    p.city,
+    p.state,
+FROM Person p
+LEFT JOIN Address a
+    ON p.personId = a.personId;
