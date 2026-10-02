@@ -10,3 +10,11 @@ shipments
 /*
 Business Question: Calculate the number of late shipments for each supplier.
 */
+
+SELECT
+  suplier_id,
+  COUNT(*) AS late_shipments
+FROM shipments
+WHERE delivery_date > promised_date
+GROUP BY supplier_id
+ORDER BY late_shipments DESC;
