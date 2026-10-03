@@ -16,3 +16,20 @@ inventory
 ```
 
 Business Question: Which warehouse currently holds the most total inventory?
+
+```SQL
+SELECT
+    warehouse_id,
+    SUM(quantity) AS total_inventory
+FROM inventory
+GROUP BY warehouse_id
+ORDER BY total_inventory DESC
+LIMIT 1;
+```
+
+Result:
+```
+warehouse_id | total_inventory
+-------------+----------------
+W001         | 800
+```
