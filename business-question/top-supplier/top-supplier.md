@@ -18,3 +18,22 @@ purchases
 Business Question:
 Calculate total purchase spend for each supplier and identify the supplier with the highest spend.
 
+```SQL
+SELECT
+  supplier_id,
+  SUM(quantity * unit_cost) AS total_spend
+FROM purchases
+GROUP BY supplier_id
+LIMIT 1;
+```
+
+Result:
+
+```
+supplier_id | total_spend
+-------------+------------
+S001         | 5000.00
+```
+
+Business Interpretation:
+S001 represents the company's largest purchasing spend. This could maek S001 a prioity for supplier negotiations, contract review, or cost-reducrtion initatives.
