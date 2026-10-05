@@ -39,3 +39,6 @@ product_id | september_sales | october_sales
 101        | 500             | 350
 103        | 400             | 300
 ```
+
+Business Interpretation:
+Products 101 and 103 experienced declining demand. The supply chain team may want to review forecasting, inventory levels, promotions, or other factors before placing additional orders. 
