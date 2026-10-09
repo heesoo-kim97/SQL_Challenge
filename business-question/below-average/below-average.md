@@ -15,4 +15,25 @@ Table: inventory
 | W002 |	P102 |	150 |
 |W002 |	P103 |	400 |
 
+```SQL
+SELECT
+    warehouse_id,
+    product_id,
+    quantity,
+    warehouse_avg
+FROM (
+    SELECT
+        warehouse_id,
+        product_id,
+        quantity,
+        AVG(quantity) OVER (
+            PARTITION BY warehouse_id
+        ) AS warehouse_avg
+    FROM inventory
+) AS stock_analysis
+WHERE quantity < warehouse_avg;
+```
 
+Result: W001/P101 (100, average 200) and W002/P101 (50, average 200).
+
+Business Interpretation: These products have lower inventory than the other products in their respecitve warehouses. Investigate demand and replenishment needs before deciding whether to transfer or reorder stock.
