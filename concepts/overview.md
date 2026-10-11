@@ -102,3 +102,55 @@ Nested – a subquery inside another subquery.
 16. What is a constraint, and why use constraints?
 A set of conditions defining the type of data that can be input into each column of a table. Constraints ensure data integrity in a table and block undesired actions.
 
+17. What SQL constraints do you know?
+DEFAULT – provides a default value for a column.
+
+UNIQUE – allows only unique values.
+
+NOT NULL – allows only non-null values.
+
+PRIMARY KEY – allows only unique and strictly non-null values (NOT NULL and UNIQUE).
+
+FOREIGN KEY – provides shared keys between two or more tables.
+
+18. What types of joins do you know?
+(INNER) JOIN – returns only those records that satisfy a defined join condition in both (or all) tables. It's a default SQL join.
+
+LEFT (OUTER) JOIN – returns all records from the left table and those records from the right table that satisfy a defined join condition.
+
+RIGHT (OUTER) JOIN – returns all records from the right table and those records from the left table that satisfy a defined join condition.
+
+FULL (OUTER) JOIN – returns all records from both (or all) tables. It can be considered as a combination of left and right joins.
+
+Note: FULL OUTER JOIN is supported by PostgreSQL, SQL Server, Oracle, and MySQL 8.0 and above, but MySQL only allows it through UNION patterns; meanwhile, SQLite does not support RIGHT JOIN, which can be emulated using LEFT JOIN in combination with UNION.
+
+19. What is a primary key in SQL?
+A column (or multiple columns) of a table to which the PRIMARY KEY constraint was imposed to ensure unique and non-null values in that column. In other words, a primary key is a combination of the NOT NULL and UNIQUE constraints.The primary key uniquely identifies each record of the table.
+
+Related concept — Surrogate key: A surrogate key is an artificially generated identifier (typically a sequential integer or UUID) assigned to each record, independent of the actual data values. Unlike natural keys (e.g., an email address), surrogate keys remain stable when business data changes, making them a popular choice for primary keys in production databases.
+
+ Each table can define at most one PRIMARY KEY (which may be composite). A PRIMARY KEY  is strongly recommended but not strictly required by all engines.
+
+20. What is a unique key in SQL?
+A column (or multiple columns) of a table to which the UNIQUE constraint was imposed to ensure unique values in that column, including a possible NULL value (the only one).
+
+Note: 
+
+SQL Server: Only one NULL allowed unless you use a filtered index.
+PostgreSQL / Oracle / MySQL: Multiple NULLs allowed because NULL <> NULL.
+21. What is a foreign key in SQL? 
+A column (or multiple columns) of a table to which the FOREIGN KEY (or UNIQUE key) constraint was imposed to link this column to the primary key in another table (or several tables).The purpose of foreign keys is to keep connected various tables of a database.
+
+22. What is an SQL index?
+A special data structure related to a database table and used for storing its important parts and enabling faster data search and retrieval. Indexes are especially efficient for large databases, where they significantly enhance query performance.
+
+23. What types of indexes do you know?
+Unique index – doesn't allow duplicates in a table column and hence helps maintain data integrity.
+Clustered index – defines the physical order of records of a database table and performs data searching based on the key values. A table can have only one clustered index.
+Non-clustered index – keeps the order of the table records that don't match the physical order of the actual data on the disk. It means that the data is stored in one place and a non-clustered index – in another one. A table can have multiple non-clustered indexes.
+24. What is a schema?
+A collection of database structural elements such as tables, stored procedures, indexes, functions, and triggers. It shows the overall database architecture, specifies the relationships between various objects of a database, and defines different access permissions for them. Read our database schema guide for a deeper understanding.
+
+25. What is a SQL operator?
+A reserved character, a combination of characters, or a keyword used in SQL queries to perform a specific operation. SQL operators are commonly used with the WHERE clause to set a condition (or conditions) for filtering the data.
+
