@@ -154,3 +154,93 @@ A collection of database structural elements such as tables, stored procedures, 
 25. What is a SQL operator?
 A reserved character, a combination of characters, or a keyword used in SQL queries to perform a specific operation. SQL operators are commonly used with the WHERE clause to set a condition (or conditions) for filtering the data.
 
+26. What types of SQL operators do you know?
+Arithmetic (+, -, *, /, etc.)
+
+Comparison (>, <, =, >=, etc.)
+
+Compound (+=, -=, *=, /=, etc.)
+
+Logical (AND, OR, NOT, BETWEEN, etc.)
+
+String (%, _, +, ^, etc.)
+
+Set (UNION, UNION ALL, INTERSECT, and MINUS (or EXCEPT))
+
+27. What is a clause?
+A condition imposed on a SQL query to filter the data to obtain the desired result. Some examples are WHERE, LIMIT, HAVING, LIKE, AND, OR, ORDER BY, etc.
+
+28. What are some common statements used with the SELECT query?
+The most common ones are FROM, GROUP BY, JOIN, WHERE, ORDER BY, LIMIT, and HAVING.
+
+29. How do you create a table in SQL?
+Using theCREATE TABLE statement. For example, to create a table with three columns of predefined datatypes, we apply the following syntax:
+
+```sql
+CREATE TABLE table_name (col_1 datatype,
+                         col_2 datatype,
+                         col_3 datatype);
+```
+
+30. How to update a table?
+Using the UPDATE statement. The syntax is:
+
+```
+UPDATE table_name
+SET col_1 = value_1, col_2 = value_2
+WHERE condition;
+```
+
+31. How to delete a table from a database?
+Using the DROP TABLE statement. The syntax is: DROP TABLE table_name;.
+
+32. How to get the count of records in a table?
+Using the COUNT() aggregate function with the asterisk passed as its argument: SELECT COUNT(*) FROM table_name;.
+
+33. How to sort records in a table?
+Using the ORDER BY statement:
+
+```sql
+SELECT * FROM table_name
+ORDER BY col_1;
+```
+
+We can specify that we need a descending order using the DESC keyword; otherwise, the order will be ascending by default. Also, we can sort by more than one column and specify for each one, ascending or descending order separately. For example:
+
+```sql
+SELECT * FROM table_name
+ORDER BY col_1 DESC, col_3, col_6 DESC;
+```
+
+34. How to select all columns from a table?
+Using the asterisk * with the SELECT statement. The syntax is: SELECT * FROM table_name;.
+
+35. How to select common records from two tables?
+Using the INTERSECT statement:
+
+```sql
+SELECT col1, col2 FROM table_1
+INTERSECT
+SELECT col1, col2 FROM table_2;
+```
+Note: INTERSECT requires the same number of columns and compatible types.
+
+36. What is the DISTINCT statement, and how do you use it?
+This statement is used with the SELECT statement to filter out duplicates and return only unique values from a column of a table. The syntax is:
+
+```sql
+SELECT DISTINCT col_1
+FROM table_name;
+```
+
+37. What are relationships? Give some examples.
+Relationships are the connections and correlations between entities, basically meaning how two or more tables of a database are related to one another. For example, we can find an ID of the same client in a table on sales data and in a customer table.
+
+38. What is a NULL value? How is it different from zero or a blank space?
+A NULL value indicates the absence of data for a certain cell of a table. Instead, zero is a valid numeric value, and an empty string is a legal string of zero length.
+
+39. What is the difference between SQL and NoSQL?
+SQL databases are relational, structured, and use tables with predefined schemas, while NoSQL databases are non-relational, schema-less, and designed to handle unstructured or semi-structured data.
+
+40. What are some common challenges when working with SQL databases?
+Challenges include performance tuning for large datasets, managing indexing strategies, ensuring data integrity with constraints, handling concurrent transactions, and optimizing query execution.
