@@ -244,3 +244,41 @@ SQL databases are relational, structured, and use tables with predefined schemas
 
 40. What are some common challenges when working with SQL databases?
 Challenges include performance tuning for large datasets, managing indexing strategies, ensuring data integrity with constraints, handling concurrent transactions, and optimizing query execution.
+
+## Intermediate SQL Questions
+
+41. What is a Common Table Expression (CTE)?
+A Common Table Expression (CTE) is a temporary named result set that you can reference within a SELECT, INSERT, UPDATE, or DELETE statement. CTEs improve query readability and allow you to break complex queries into simpler, reusable parts. The syntax uses the WITH keyword:
+
+```sql
+WITH sales_summary AS (
+  SELECT product_id, SUM(amount) AS total_sales
+  FROM sales
+  GROUP BY product_id
+)
+SELECT p.product_name, s.total_sales
+FROM products p
+JOIN sales_summary s ON p.id = s.product_id
+WHERE s.total_sales > 10000;
+```
+CTEs are particularly useful for recursive queries (hierarchical data like org charts) and when you need to reference the same subquery multiple times.
+
+42. What are window functions, and how do they differ from aggregate functions?
+Window functions perform calculations across a set of rows related to the current row, without collapsing the result into a single output row like aggregate functions do. They use the OVER() clause to define the window of rows.
+
+Key window functions include:
+
+ROW_NUMBER() – assigns a unique sequential number to each row
+RANK() – assigns a rank with gaps for ties
+DENSE_RANK() – assigns a rank without gaps for ties
+LAG() / LEAD() – access data from previous/next rows
+SUM() OVER(), AVG() OVER() – running or cumulative calculations
+Example: Calculate running total of sales
+
+```sql
+SELECT 
+  order_date,
+  amount,
+  SUM(amount) OVER (ORDER BY order_date) AS running_total
+FROM orders;
+```
