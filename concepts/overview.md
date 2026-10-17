@@ -268,11 +268,11 @@ Window functions perform calculations across a set of rows related to the curren
 
 Key window functions include:
 
-ROW_NUMBER() – assigns a unique sequential number to each row
-RANK() – assigns a rank with gaps for ties
-DENSE_RANK() – assigns a rank without gaps for ties
-LAG() / LEAD() – access data from previous/next rows
-SUM() OVER(), AVG() OVER() – running or cumulative calculations
+`ROW_NUMBER()` – assigns a unique sequential number to each row
+`RANK()` – assigns a rank with gaps for ties
+`DENSE_RANK()` – assigns a rank without gaps for ties
+`LAG() / LEAD()` – access data from previous/next rows
+`SUM() OVER(), AVG() OVER()` – running or cumulative calculations
 Example: Calculate running total of sales
 
 ```sql
@@ -324,45 +324,45 @@ On the other hand, SQL functions can be built-in (defined by the system) or user
 `COUNT()` – returns the number of rows, including those with null values
 
 47. What SQL scalar functions do you know?
-LEN() (in other SQL dialects – LENGTH()) – returns the length of a string, including the blank spaces
+`LEN()` (in other SQL dialects – `LENGTH()`) – returns the length of a string, including the blank spaces
 
-UCASE() (in other SQL dialects – UPPER()) – returns a string converted to the upper case
+`UCASE()` (in other SQL dialects – `UPPER()`) – returns a string converted to the upper case
 
-LCASE() (in other SQL dialects – LOWER()) – returns a string converted to the lower case
+`LCASE()` (in other SQL dialects – `LOWER()`) – returns a string converted to the lower case
 
-INITCAP() – returns a string converted to the title case (i.e., each word of the string starts from a capital letter)
+`INITCAP()` – returns a string converted to the title case (i.e., each word of the string starts from a capital letter)
 
-MID() (in other SQL dialects – SUBSTR()) – extracts a substring from a string
+`MID()` (in other SQL dialects – `SUBSTR()`) – extracts a substring from a string
 
-ROUND() – returns the numerical value rounded to a specified number of decimals
+`ROUND()` – returns the numerical value rounded to a specified number of decimals
 
-NOW() – returns the current date and time
+`NOW()` – returns the current date and time
 
 48. What are case manipulation functions in SQL?
 Case manipulation functions represent a subset of character functions, and they're used to change the case of the text data. With these functions, we can convert the data into the upper, lower, or title case.
 
-UCASE() (in other SQL dialects – UPPER()) – returns a string converted to the upper case
+`UCASE()` (in other SQL dialects – `UPPER()`) – returns a string converted to the upper case
 
-LCASE() (in other SQL dialects – LOWER()) – returns a string converted to the lower case
+`LCASE()` (in other SQL dialects – `LOWER()`) – returns a string converted to the lower case
 
-INITCAP() – returns a string converted to the title case (i.e., each word of the string starts from a capital letter)
+`INITCAP()` – returns a string converted to the title case (i.e., each word of the string starts from a capital letter)
 
 49. What are character manipulation functions in SQL?
 Character manipulation functions represent a subset of character functions, and they're used to modify the text data.
 
-CONCAT() – joins two or more string values appending the second string to the end of the first one
+`CONCAT()` – joins two or more string values appending the second string to the end of the first one
 
-SUBSTRING()/SUBSTR() – returns a part of a string satisfying the provided start and end points
+`SUBSTRING()/SUBSTR()` – returns a part of a string satisfying the provided start and end points
 
-LENGTH() (in other SQL dialects – LEN()) – returns the length of a string, including the blank spaces
+`LENGTH()` (in other SQL dialects – `LEN()`) – returns the length of a string, including the blank spaces
 
-REPLACE() – replaces all occurrences of a defined substring in a provided string with another substring
+`REPLACE()` – replaces all occurrences of a defined substring in a provided string with another substring
 
-INSTR() – returns the numeric position of a defined substring in a provided string
+`INSTR()` – returns the numeric position of a defined substring in a provided string
 
-LPAD() and RPAD() – return the padding of the left-side/right-side character for right-justified/left-justified value
+`LPAD()` and `RPAD()` – return the padding of the left-side/right-side character for right-justified/left-justified value
 
-TRIM() – removes all the defined characters, as well as white spaces, from the left, right, or both ends of a provided string
+`TRIM()` – removes all the defined characters, as well as white spaces, from the left, right, or both ends of a provided string
 
 50. What is the difference between local and global variables?
 Local variables can be accessed only inside the function in which they were declared. Instead, global variables, being declared outside any function, are stored in fixed memory structures and can be used throughout the entire program.
