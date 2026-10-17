@@ -282,3 +282,96 @@ SELECT
   SUM(amount) OVER (ORDER BY order_date) AS running_total
 FROM orders;
 ```
+
+43. What is the difference between RANK(), DENSE_RANK(), and ROW_NUMBER()?
+All three are ranking window functions, but they handle ties differently:
+
+`ROW_NUMBER()` – always assigns unique sequential numbers (1, 2, 3, 4...), even for ties
+`RANK()` – assigns the same rank to ties, then skips numbers (1, 2, 2, 4...)
+`DENSE_RANK()` – assigns the same rank to ties, without skipping (1, 2, 2, 3...)
+
+```sql
+SELECT 
+  name, 
+  score,
+  ROW_NUMBER() OVER (ORDER BY score DESC) AS row_num,
+  RANK() OVER (ORDER BY score DESC) AS rank,
+  DENSE_RANK() OVER (ORDER BY score DESC) AS dense_rank
+FROM students;
+```
+
+Use DENSE_RANK() when finding the "nth highest" value where ties should share the same position.
+
+In this section, we take a look at the most popular intermediate SQL questions and answers so that you'll know what to expect from your interviewer.
+
+44. What is a function in SQL?
+A database object representing a set of SQL statements frequently used for a certain task. A function takes in some input parameters, performs calculations or other manipulations on them, and returns the result. Functions help improve code readability and avoid repetition of the same code snippets.
+
+45. What types of SQL functions do you know?
+Aggregate functions – work on multiple, usually grouped records for the provided columns of a table, and return a single value (usually by group).
+Scalar functions – work on each individual value and return a single value.
+On the other hand, SQL functions can be built-in (defined by the system) or user-defined (created by the user for their specific needs).
+
+46. What SQL aggregate functions do you know?
+`AVG()` – returns the average value
+
+`SUM()` – returns the sum of values
+
+`MIN()` – returns the minimum value
+
+`MAX()` – returns the maximum value
+
+`COUNT()` – returns the number of rows, including those with null values
+
+47. What SQL scalar functions do you know?
+LEN() (in other SQL dialects – LENGTH()) – returns the length of a string, including the blank spaces
+
+UCASE() (in other SQL dialects – UPPER()) – returns a string converted to the upper case
+
+LCASE() (in other SQL dialects – LOWER()) – returns a string converted to the lower case
+
+INITCAP() – returns a string converted to the title case (i.e., each word of the string starts from a capital letter)
+
+MID() (in other SQL dialects – SUBSTR()) – extracts a substring from a string
+
+ROUND() – returns the numerical value rounded to a specified number of decimals
+
+NOW() – returns the current date and time
+
+48. What are case manipulation functions in SQL?
+Case manipulation functions represent a subset of character functions, and they're used to change the case of the text data. With these functions, we can convert the data into the upper, lower, or title case.
+
+UCASE() (in other SQL dialects – UPPER()) – returns a string converted to the upper case
+
+LCASE() (in other SQL dialects – LOWER()) – returns a string converted to the lower case
+
+INITCAP() – returns a string converted to the title case (i.e., each word of the string starts from a capital letter)
+
+49. What are character manipulation functions in SQL?
+Character manipulation functions represent a subset of character functions, and they're used to modify the text data.
+
+CONCAT() – joins two or more string values appending the second string to the end of the first one
+
+SUBSTRING()/SUBSTR() – returns a part of a string satisfying the provided start and end points
+
+LENGTH() (in other SQL dialects – LEN()) – returns the length of a string, including the blank spaces
+
+REPLACE() – replaces all occurrences of a defined substring in a provided string with another substring
+
+INSTR() – returns the numeric position of a defined substring in a provided string
+
+LPAD() and RPAD() – return the padding of the left-side/right-side character for right-justified/left-justified value
+
+TRIM() – removes all the defined characters, as well as white spaces, from the left, right, or both ends of a provided string
+
+50. What is the difference between local and global variables?
+Local variables can be accessed only inside the function in which they were declared. Instead, global variables, being declared outside any function, are stored in fixed memory structures and can be used throughout the entire program.
+
+51. What is the difference between SQL and PL/SQL?
+SQL is a standard language for querying and managing relational databases, primarily used for data manipulation and retrieval. PL/SQL (Procedural Language/SQL) is an extension of SQL used in Oracle databases that includes procedural programming constructs like loops, conditions, and exception handling, allowing for complex business logic to be implemented within the database. We have another article on the Top 20 PL/SQL Interview Questions and Answers, which is a good review if you know you will be asked about your knowledge of Oracle. 
+
+52. What is the difference between LEFT JOIN and LEFT OUTER JOIN?
+There is no difference between LEFT JOIN and LEFT OUTER JOIN. They are interchangeable. SQL allows the OUTER keyword to be optional, so LEFT JOIN is simply a shorthand for LEFT OUTER JOIN. Both return all records from the left table and the matching records from the right table.
+
+53. What is indexing in SQL, and how does it improve performance?
+Indexing creates a special data structure that speeds up data retrieval by allowing the database to find rows more efficiently. It works like an optimized lookup table, reducing the need for full table scans. However, excessive indexing can slow down insert, update, and delete operations due to the need for index maintenance.
