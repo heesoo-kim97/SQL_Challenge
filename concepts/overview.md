@@ -375,3 +375,89 @@ There is no difference between LEFT JOIN and LEFT OUTER JOIN. They are interchan
 
 53. What is indexing in SQL, and how does it improve performance?
 Indexing creates a special data structure that speeds up data retrieval by allowing the database to find rows more efficiently. It works like an optimized lookup table, reducing the need for full table scans. However, excessive indexing can slow down insert, update, and delete operations due to the need for index maintenance.
+
+54. What is a stored procedure, and how is it different from a function?
+A stored procedure is a precompiled set of SQL statements executed as a unit to perform a task. Procedures can modify data or schema objects, manage transactions, and return zero or more result sets. Functions, on the other hand, are typically used in SQL expressions, must return a value (scalar or table-valued), and in many databases are restricted from side effects. Exact behavior differs by DB (e.g., T-SQL has scalar and table-valued functions; PostgreSQL distinguishes between functions and procedures).
+
+55. What is the default data ordering with the ORDER BY statement, and how do you change it?
+Default is ascending (NULLS FIRST/LAST varies by DB). Use ASC/DESC per column keyword as follows:
+
+```sql
+SELECT * FROM table_name 
+ORDER BY col_1 DESC;
+```
+
+56. What are SQL set operators?
+`UNION` – returns the records obtained by at least one of two queries (excluding duplicates)
+
+`UNION ALL` – returns the records obtained by at least one of two queries (including duplicates)
+
+`INTERSECT` – returns the records obtained by both queries
+
+`EXCEPT` (called MINUS in MySQL and Oracle) – returns only the records obtained by the first query but not the second one
+
+57. What operator is used in the query for pattern matching?
+The LIKE operator in combination with the % and _ wildcards. The % wildcard represents any number of characters including zero, while _ – strictly one character.
+
+58. What is the difference between a primary key and a unique key in SQL?
+While both types of keys ensure unique values in a column of a table, the first one uniquely identifies each record of the table, and the second one prevents duplicates in that column.
+
+59. What is a SQL composite primary key?
+The primary key of a table, based on multiple columns.
+
+60. What is the typical order of SQL clauses in a SELECT statement?
+`SELECT – FROM – JOIN – ON – WHERE – GROUP BY – HAVING – ORDER BY – LIMIT`
+
+61. In which order does the interpreter execute the common statements in the SELECT query?
+Here is the SQL order of execution: 
+
+`FROM → ON → JOIN → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT/OFFSET (FETCH)`
+
+62. What is a view in SQL?
+A virtual table containing a subset of data retrieved from one or more database tables (or other views). Standard views store no data; materialized views do.Views can simplify queries, encapsulate logic, and, combined with privileges, restrict columns/rows. They can join/aggregate data from multiple tables.
+
+63. Can we create a view based on another view in SQL?
+Yes. This is also known as nested views. However, we should avoid nesting multiple views since the code becomes difficult to read and debug.
+
+64. Can we still use a view if the original table is deleted?
+No. Any views based on that table will become invalid after deleting the base table. If we try to use such a view anyway, we'll receive an error message.
+
+65. What types of SQL relationships do you know?
+One-to-one – each record in one table corresponds to only one record in another table
+One-to-many – each record in one table corresponds to several records in another table
+Many-to-many – each record in both tables corresponds to several records in another table
+66. What are the possible values of a BOOLEAN data field?
+In some SQL dialects, such as PostgreSQL, the BOOLEAN data type exists explicitly and takes values TRUE, FALSE, or NULL. In other dialects, such as Microsoft SQL Server, the BIT datatype is used to store Boolean values as integers 1 (true) or 0 (false).
+
+67. What is normalization in SQL?
+Normalization is a process of database design that includes organizing and restructuring data in a way to reduce data redundancy, dependency, duplication, and inconsistency. This leads to enhanced data integrity, more tables within the database, more efficient data access and security control, and greater query flexibility.
+
+68. What is denormalization in SQL?
+Denormalization is the process opposite of normalization: it introduces data redundancy and combines data from multiple tables. Denormalization optimizes the performance of the database infrastructure in situations when read operations are more important than write operations since it helps avoid complex joins and reduces the time of query running.
+
+69. What is the difference between renaming a column and giving an alias to it?
+Renaming a column means permanently changing its actual name in the original table. Giving an alias to a column means giving it a temporary name while executing an SQL query, with the purpose to make the code more readable and compact.
+
+70. What is the difference between nested and correlated subqueries?
+A correlated subquery is an inner query nested in a bigger (outer) query that refers to the values from the outer query for its execution, meaning that a correlated subquery depends on its outer query.Instead, a non-correlated subquery doesn't rely on the data from the outer query and can be run independently of it.
+
+71. What is the difference between clustered and non-clustered indexes?
+While a clustered index defines the physical order of records of a table and performs data searching based on the key values, a non-clustered index keeps the order of records that do not match the physical order of the actual data on the disk. A table can have only one clustered index but many non-clustered ones.
+
+72. What is the CASE() function?
+The way to implement the if-then-else logic in SQL. This function sequentially checks the provided conditions in the WHEN clauses and returns the value from the corresponding THEN clause when the first condition is satisfied. If none of the conditions is satisfied, the function returns the value from the ELSE clause in case it's provided, otherwise, it returns NULL. The syntax is:
+
+```sql
+CASE
+    WHEN condition_1 THEN value_1
+    WHEN condition_2 THEN value_2
+    WHEN condition_3 THEN value_3
+    ...
+    ELSE value
+END;
+```
+
+73. What is the difference between the DELETE and TRUNCATE statements?
+DELETE is a DML (Data Manipulation Language) command used to remove one or more rows from a table based on a condition in the WHERE clause. It is reversible only if wrapped in a transaction (via ROLLBACK).
+
+TRUNCATE is a DDL (Data Definition Language) command that removes all rows from a table by deallocating pages. It is faster but generally irreversible, and cannot be used on tables that are referenced by a foreign key.
