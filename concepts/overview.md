@@ -596,3 +596,58 @@ ORDER BY RAND()
 LIMIT 5;
 ```
 
+## Scenario-Based SQL Interview Questions
+
+Scenario-based questions test your ability to solve real-world business problems with SQL. Interviewers use these to assess not just your syntax knowledge, but your problem-solving approach and ability to handle edge cases like duplicates, NULL values, and ties.
+
+88. How do you find and remove duplicate records from a table?
+Finding duplicates:
+
+```sql
+SELECT email, COUNT(*) AS duplicate_count
+FROM users
+GROUP BY email
+HAVING COUNT(*) > 1;
+```
+
+Removing duplicates (keeping one record):
+
+```sql
+WITH duplicates AS (
+  SELECT id, 
+         ROW_NUMBER() OVER (PARTITION BY email ORDER BY id) AS rn
+  FROM users
+)
+DELETE FROM users 
+WHERE id IN (SELECT id FROM duplicates WHERE rn > 1);
+```
+
+This approach uses a CTE with `ROW_NUMBER()` to identify duplicates, keeping the record with the lowest ID.
+
+89. How do you calculate a running total (cumulative sum)?
+Use the `SUM()` window function with an `ORDER BY` clause:
+
+```sql
+SELECT 
+  transaction_date,
+  amount,
+  SUM(amount) OVER (ORDER BY transaction_date) AS running_total
+FROM transactions;
+```
+
+For a running total per category (e.g., per customer):
+
+```sql
+SELECT 
+  customer_id,
+  transaction_date,
+  amount,
+  SUM(amount) OVER (
+    PARTITION BY customer_id 
+    ORDER BY transaction_date
+  ) AS customer_running_total
+FROM transactions;
+```
+
+
+
