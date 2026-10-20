@@ -138,6 +138,7 @@ Note:
 
 SQL Server: Only one NULL allowed unless you use a filtered index.
 PostgreSQL / Oracle / MySQL: Multiple NULLs allowed because NULL <> NULL.
+
 21. What is a foreign key in SQL? 
 A column (or multiple columns) of a table to which the FOREIGN KEY (or UNIQUE key) constraint was imposed to link this column to the primary key in another table (or several tables).The purpose of foreign keys is to keep connected various tables of a database.
 
@@ -509,4 +510,89 @@ ALTER TABLE table_name
 DROP COLUMN column_name;
 ```
 
+81. How do you select all even or all odd records in a table?
+By checking the remainder of the division by 2. In some SQL versions (e.g., PostgreSQL and MySQL), we use the MOD function, in the others (Microsoft SQL Server and SQLite) – the modulo operator (%). To select all even records using MOD:
+
+```sql
+SELECT * FROM table_name
+WHERE MOD(ID_column, 2) = 0;
+```
+
+To select all even records using %:
+
+```sql
+SELECT * FROM table_name 
+WHERE ID_column % 2 = 0;
+```
+
+To select all odd records, the syntax is identical in both cases, only that we would use the inequality operator <> instead of =.
+
+82. How to prevent duplicate records when making a query?
+Using the DISTINCT statement in combination with SELECT or creating a unique key for that table.
+
+83. How do you insert many rows in a table?
+Using the INSERT INTO statement in combination with VALUES. The syntax is:
+
+```sql
+INSERT INTO table_name
+VALUES (value_1, value_2, ...),
+      (value_3, value_4, ...),
+      (value_5, value_6, ...),
+      ...;
+```
+
+84. How do you find the nth highest value in a column of a table?
+Using window functions to handle ties correctly:
+
+```sql
+SELECT column_name
+FROM (
+  SELECT column_name, DENSE_RANK() OVER (ORDER BY column_name DESC) AS rnk
+  FROM table_name
+) t
+WHERE rnk = :n;
+```
+
+For the nth row by order (ignoring ties): ORDER BY column_name DESC OFFSET n-1 ROWS FETCH NEXT 1 ROW ONLY.
+
+85. How do you find the values in a text column of a table that start with a certain letter?
+Using the LIKE operator in combination with the % and _ wildcards. For example, we need to find all surnames in a table that start with "A". The query is:
+
+```sql
+SELECT * FROM table_name
+WHERE surname LIKE 'A_';
+```
+
+Here, we assume that a surname must contain at least two letters. Without this assumption (meaning that a surname can be just A), the query is as follows:
+
+```sql
+SELECT * FROM table_name
+WHERE surname LIKE 'A%';
+```
+
+86. How do you find the last id in a table?
+The simplest method is to use the aggregate function MAX().
+
+```sql
+SELECT MAX(id) AS highest_id
+FROM table_name;
+```
+
+Using ORDER BY with LIMIT or TOP
+
+```sql
+SELECT id
+FROM table_name
+ORDER BY id DESC
+LIMIT 1;
+```
+
+87. How to select random rows from a table?
+Using the RAND() function in combination with ORDER BY and LIMIT. In some SQL dialects, such as PostgreSQL, it's called RANDOM(). For example, the following code will return five random rows from a table in MySQL:
+
+```sql
+SELECT * FROM table_name
+ORDER BY RAND()
+LIMIT 5;
+```
 
