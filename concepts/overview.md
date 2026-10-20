@@ -458,6 +458,55 @@ END;
 ```
 
 73. What is the difference between the DELETE and TRUNCATE statements?
-DELETE is a DML (Data Manipulation Language) command used to remove one or more rows from a table based on a condition in the WHERE clause. It is reversible only if wrapped in a transaction (via ROLLBACK).
+`DELETE` is a DML (Data Manipulation Language) command used to remove one or more rows from a table based on a condition in the `WHERE` clause. It is reversible only if wrapped in a transaction (via ROLLBACK).
 
-TRUNCATE is a DDL (Data Definition Language) command that removes all rows from a table by deallocating pages. It is faster but generally irreversible, and cannot be used on tables that are referenced by a foreign key.
+`TRUNCATE` is a DDL (Data Definition Language) command that removes all rows from a table by deallocating pages. It is faster but generally irreversible, and cannot be used on tables that are referenced by a foreign key.
+
+74. What is the difference between the DROP and TRUNCATE statements?
+`DROP` deletes a table from the database completely, including the table structure and all the associated constraints, relationships with other tables, and access privileges. `TRUNCATE` deletes all rows from a table without affecting the table structure and constraints.  Both are DDL. `DROP` removes the table and its metadata; `TRUNCATE` deletes all rows but keeps the table definition. Performance and transactional behavior depend on the DB engine.
+
+75. What is the difference between the HAVING and WHERE statements?
+The first one works on aggregated data after they are grouped, while the second one checks each row individually. If both statements are present in a query, they appear in the following order:`WHERE – GROUP BY – HAVING`. The SQL engine interprets them also in the same order.
+
+76. How do you add a record to a table?
+Using the INSERT INTO statement in combination with VALUES. The syntax is:
+
+```sql
+INSERT INTO table_name
+VALUES (value_1, value_2, ...);
+```
+
+77. How do you delete a record from a table?
+Using the `DELETE` statement. The syntax is:
+
+```sql
+DELETE FROM table_name
+WHERE condition;
+```
+In this way, we can also delete multiple records if they satisfy the provided condition.
+
+78. How do you add a column to a table?
+Using the `ALTER TABLE` statement in combination with `ADD`. The syntax is:
+
+```sql
+ALTER TABLE table_name
+ADD column_name datatype;
+```
+
+79. How do you rename a column of a table?
+Using the `ALTER TABLE` statement in combination with `RENAME COLUMN ... TO ...` The syntax is:
+
+```sql
+ALTER TABLE table_name
+RENAME COLUMN old_column_name TO new_column_name;
+```
+
+80. How do you delete a column from a table?
+Using the `ALTER TABLE` statement in combination with `DROP COLUMN`. The syntax is:
+
+```sql
+ALTER TABLE table_name
+DROP COLUMN column_name;
+```
+
+
