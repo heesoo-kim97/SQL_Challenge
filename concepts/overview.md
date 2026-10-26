@@ -727,3 +727,57 @@ GROUP BY product_name;
 Some databases (SQL Server, Oracle) have native PIVOT syntax for this operation.
 
 
+94. How do you find the top 3 products by sales in each category?
+Use `DENSE_RANK()` with PARTITION BY:
+
+```sql
+WITH ranked_products AS (
+  SELECT 
+    category,
+    product_name,
+    SUM(sales_amount) AS total_sales,
+    DENSE_RANK() OVER (
+      PARTITION BY category 
+      ORDER BY SUM(sales_amount) DESC
+    ) AS sales_rank
+  FROM sales
+  GROUP BY category, product_name
+)
+SELECT category, product_name, total_sales
+FROM ranked_products
+WHERE sales_rank <= 3
+ORDER BY category, sales_rank;
+```
+
+95. What are ACID properties in database transactions?
+ACID is an acronym for the four key properties that guarantee reliable database transactions:
+
+- Atomicity: A transaction is "all or nothing" – either all operations complete successfully, or none do
+- Consistency: A transaction brings the database from one valid state to another, maintaining all defined rules and constraints
+- Isolation: Concurrent transactions don't interfere with each other; each transaction sees a consistent snapshot of the data
+- Durability: Once a transaction is committed, the changes persist even if the system crashes
+
+Example transaction:
+
+```sql
+BEGIN TRANSACTION;
+
+UPDATE accounts SET balance = balance - 100 WHERE account_id = 1;
+UPDATE accounts SET balance = balance + 100 WHERE account_id = 2;
+
+COMMIT;
+```
+
+96. What is a deadlock, and how do you prevent it?
+97. 
+A deadlock occurs when two or more transactions are waiting for each other to release locks, creating a circular dependency where neither can proceed.
+
+Example scenario: Transaction A locks Table X and waits for Table Y, while Transaction B locks Table Y and waits for Table X.
+
+Prevention strategies:
+
+- Consistent lock ordering: Always acquire locks in the same order across all transactions
+- Keep transactions short: Commit or rollback as quickly as possible
+- Use appropriate isolation levels: Lower isolation levels reduce lock contention
+- Access only required data: Avoid locking unnecessary rows
+- Handle deadlock retries: Most databases automatically detect and resolve deadlocks by rolling back one transaction
