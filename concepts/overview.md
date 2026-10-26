@@ -769,7 +769,7 @@ COMMIT;
 ```
 
 96. What is a deadlock, and how do you prevent it?
-97. 
+    
 A deadlock occurs when two or more transactions are waiting for each other to release locks, creating a circular dependency where neither can proceed.
 
 Example scenario: Transaction A locks Table X and waits for Table Y, while Transaction B locks Table Y and waits for Table X.
