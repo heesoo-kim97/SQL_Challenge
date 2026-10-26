@@ -649,5 +649,81 @@ SELECT
 FROM transactions;
 ```
 
+90. How do you find employees who earn more than the average salary in their department?
+This is a classic correlated subquery scenario:
+
+```sql
+SELECT e.name, e.department, e.salary
+FROM employees e
+WHERE e.salary > (
+  SELECT AVG(salary) 
+  FROM employees 
+  WHERE department = e.department
+);
+```
+
+Alternatively, using a window function:
+
+```sql
+SELECT name, department, salary
+FROM (
+  SELECT 
+    name, 
+    department, 
+    salary,
+    AVG(salary) OVER (PARTITION BY department) AS dept_avg
+  FROM employees
+) t
+WHERE salary > dept_avg;
+```
+ 
+91. How do you find gaps in a sequence of numbers (e.g., missing invoice numbers)?
+Use `LEAD()` to compare each value with the next:
+
+```sql
+SELECT 
+  invoice_number,
+  LEAD(invoice_number) OVER (ORDER BY invoice_number) AS next_invoice,
+  LEAD(invoice_number) OVER (ORDER BY invoice_number) - invoice_number - 1 AS gap_size
+FROM invoices
+WHERE LEAD(invoice_number) OVER (ORDER BY invoice_number) - invoice_number > 1;
+```
+ 
+This identifies where the gap between consecutive invoice numbers is greater than 1.
+
+92. How do you find customers who made purchases in consecutive months?
+Use `LAG()` to compare with the previous row:
+
+```sql
+WITH monthly_purchases AS (
+  SELECT 
+    customer_id,
+    DATE_TRUNC('month', purchase_date) AS purchase_month,
+    LAG(DATE_TRUNC('month', purchase_date)) OVER (
+      PARTITION BY customer_id 
+      ORDER BY DATE_TRUNC('month', purchase_date)
+    ) AS prev_month
+  FROM purchases
+  GROUP BY customer_id, DATE_TRUNC('month', purchase_date)
+)
+SELECT DISTINCT customer_id
+FROM monthly_purchases
+WHERE purchase_month = prev_month + INTERVAL '1 month';
+```
+
+93. How do you pivot data from rows to columns?
+Use conditional aggregation with CASE statements:
+
+```sql
+SELECT 
+  product_name,
+  SUM(CASE WHEN EXTRACT(MONTH FROM sale_date) = 1 THEN amount ELSE 0 END) AS jan_sales,
+  SUM(CASE WHEN EXTRACT(MONTH FROM sale_date) = 2 THEN amount ELSE 0 END) AS feb_sales,
+  SUM(CASE WHEN EXTRACT(MONTH FROM sale_date) = 3 THEN amount ELSE 0 END) AS mar_sales
+FROM sales
+GROUP BY product_name;
+```
+
+Some databases (SQL Server, Oracle) have native PIVOT syntax for this operation.
 
 
