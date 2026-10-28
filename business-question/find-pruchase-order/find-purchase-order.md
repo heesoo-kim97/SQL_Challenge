@@ -14,4 +14,21 @@ Table: `purchase_orders`
 
 Business Problem: Identify every purchase order received after its promised date and calculate the number of days late.
 
+Result
+```sql
+SELECT
+    po_id,
+    supplier_id,
+    DATEDIFF(received_date, promised_date) AS days_late
+FROM purchase_orders
+WHERE received_date > promised_date;
+```
 
+Expected Result:
+| po_id |	supplier_id | days_late |
+| --- | --- | --- |
+| 1001 |	S001 |	3 |
+| 1003 |	S001 |	5 |
+| 1005 |	S002 |	4 |
+
+Business Interpretation: Supplier S001 has two late purchase orders, with delays of 3 and 5 days. The procurement team could investigate recurring delays and assess whether safety stock or alternative suppliers are needed.
