@@ -21,3 +21,25 @@ Business Problem: The same distributor may report sales for multiple SKUs each m
 
 Task: Write a query that returns only combinations appearing more than once.
 
+Result:
+
+```sql
+SELECT
+    distributor_id,
+    sku,
+    report_month,
+    COUNT(*) AS record_count
+FROM distributor_sales
+GROUP BY
+    distributor_id,
+    sku,
+    report_month
+HAVING COUNT(*) > 1;
+```
+Expected result:
+| distributor_id |	sku	report_month |	record_count |
+| --- | --- | --- |
+| D01 |	SK101 |	2026-09 |	2 |
+| D01 |	SK102 |	2026-09 |	2 |
+
+Business interpretation: Two distributor-SKU-month combinations have duplicate records. The analytics team should investigate these records before refreshing the reporting pipeline to prevent overstating sales.
