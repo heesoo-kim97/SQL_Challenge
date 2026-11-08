@@ -41,3 +41,24 @@ Write a SQL query returning:
 - Sales target
 - Sales variance (actual sales minus target)
 - Target status
+
+Answer:
+
+```sql
+SELECT
+    s.market,
+    s.month,
+    s.actual_sales,
+    t.sales_target,
+    s.actual_sales - t.sales_target AS sales_variance,
+    CASE
+        WHEN s.actual_sales >= t.sales_target
+            THEN 'Target Achieved'
+        ELSE 'Target Missed'
+    END AS target_status
+FROM monthly_sales s
+JOIN sales_targets t
+    ON s.market = t.market
+    AND s.month = t.month;
+```
+
