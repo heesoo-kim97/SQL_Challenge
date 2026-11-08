@@ -62,3 +62,16 @@ JOIN sales_targets t
     AND s.month = t.month;
 ```
 
+Expected result:
+| Market |	Month |	Variance |	Status |
+| --- | --- | --- | --- |
+| Japan | September | +10,000 |	Achieved |
+| Korea | September | -10,000 |	Missed |
+| France | September | -10,000 | Missed |
+| Japan | October |	+10,000 | Achieved |
+| Korea | October |	-10,000 | Missed |
+| France | October | +10,000 | Achieved |
+
+Business interpretation: 
+Japan consistently exceeded its targets, while Korea missed its target in both months. Management could investigate pricing, demand, product assortment, or market-specific merchandising strategies in Korea.
+
