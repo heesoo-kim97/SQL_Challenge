@@ -46,3 +46,29 @@ Write a SQL query returning:
 - Approval status (Approved or Rejected)
 A request is approved if its gross margin is greater than or equal to 35%.
 
+Answer:
+
+```sql
+SELECT
+    p.request_id,
+    p.sku,
+    p.market,
+    p.requested_price,
+    c.unit_cost,
+    ROUND(
+        100.0 * (p.requested_price - c.unit_cost)
+        / p.requested_price,
+        2
+    ) AS gross_margin,
+    CASE
+        WHEN (p.requested_price - c.unit_cost)
+             / p.requested_price >= 0.35
+        THEN 'Approved'
+        ELSE 'Rejected'
+    END AS approval_status
+FROM price_requests p
+JOIN product_costs c
+    ON p.sku = c.sku;
+```
+
+
