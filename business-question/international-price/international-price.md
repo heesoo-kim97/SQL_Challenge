@@ -71,4 +71,19 @@ JOIN product_costs c
     ON p.sku = c.sku;
 ```
 
+Expected Result:
+
+| Request |	SKU | Margin |	Status |
+| --- | --- | --- | --- |
+| 1001 | SK101 | 41.18% | Approved |
+| 1002 | SK102 | 31.58% | Rejected |
+| 1003 | SK103 | 45.45% | Approved |
+| 1004 | SK104 | 26.67% | Rejected |
+| 1005 | SK105 | 25.00% | Rejected |
+
+Business interpretation: 
+
+Three of the five pricing requests fail the minimum margin requirement. The pricing team may need to negotiate higher selling prices or lower product costs before approving those requests.
+
+
 
