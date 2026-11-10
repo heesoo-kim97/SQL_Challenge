@@ -27,3 +27,22 @@ Table: `product_costs`
 | SK103 |	60 |
 | SK104 |	55 |
 | SK105 |	90 |
+
+Business Problem
+
+The pricing team wants to identify which price requests meet the minimum 35% gross margin requirement.
+
+Gross Margin Formula: (Requested price - Unite cost) / Request price x 100
+
+my task:
+
+Write a SQL query returning:
+- Request ID
+- SKU
+- Market
+- Requested price
+- Unit cost
+- Gross margin percentage
+- Approval status (Approved or Rejected)
+A request is approved if its gross margin is greater than or equal to 35%.
+
