@@ -87,4 +87,17 @@ WHERE revenue_rank <= 2
 ORDER BY market, revenue_rank;
 ```
 
+Expected Result:
+
+| Market | SKU | Product | Revenue | Rank |
+| --- | --- | --- | --- | --- |
+| France | SK104 | Walking Shoes | 72,000 | 1 |
+| France | SK105 | Sandals | 20,000 | 2 |
+| Japan | SK101 | Running Shoes | 50,000 | 1 |
+| Japan | SK103 | Casual Shoes | 42,000 | 2 |
+| Korea | SK102 | Training Shoes | 48,000 |	1 |
+| Korea | SK101 | Running Shoes | 40,000 | 2 |
+
+Business interpretation: 
+Japan generates the most revenue from Running Shoes, while Korea's top performer is Training Shoes. The merchandising team can use this information to make market-specific assortment, inventory allocation, and promotional decisions.
 
