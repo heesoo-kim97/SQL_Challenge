@@ -51,3 +51,40 @@ Write a SQL query returning:
 
 Only return the top two products per market.
 
+
+## Answer:
+
+```sql
+WITH product_revenue AS (
+    SELECT
+        s.market,
+        s.sku,
+        p.product_name,
+        SUM(s.units_sold * p.unit_price) AS total_revenue
+    FROM sales s
+    JOIN products p
+        ON s.sku = p.sku
+    GROUP BY
+        s.market,
+        s.sku,
+        p.product_name
+),
+ranked_products AS (
+    SELECT
+        market,
+        sku,
+        product_name,
+        total_revenue,
+        ROW_NUMBER() OVER (
+            PARTITION BY market
+            ORDER BY total_revenue DESC
+        ) AS revenue_rank
+    FROM product_revenue
+)
+SELECT *
+FROM ranked_products
+WHERE revenue_rank <= 2
+ORDER BY market, revenue_rank;
+```
+
+
