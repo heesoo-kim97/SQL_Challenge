@@ -25,4 +25,35 @@ Write a SQL query that identifies the number of customers with incomplete contac
 
 A customer is considered to have incomplete contact information if either their email or phone number is missing.
 
+## SQL Solution:
+
+```
+SELECT
+    service_type,
+    COUNT(*) AS incomplete_customers
+FROM Customers
+WHERE email IS NULL
+   OR phone IS NULL
+GROUP BY service_type
+ORDER BY service_type;
+```
+
+**Expected result:**
+
+| service_type | incomplete_customers |
+| ------------ | -------------------- |
+| Commercial   | 2                    |
+| Residential  | 2                    |
+
+
+**Business interpretation**
+
+Four customer records have incomplete contact information:
+
+- 2 Residential customers
+- 2 Commercial customers
+- 0 Industrial customers
+
+The IT team should flag these records for review before migrating them into Salesforce. Missing contact information could affect customer communication, service notifications, and the accuracy of the new CRM database.
+
 
