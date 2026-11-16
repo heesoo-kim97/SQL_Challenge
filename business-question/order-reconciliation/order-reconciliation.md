@@ -57,5 +57,19 @@ ORDER BY l.order_id;
 
 ```
 
+## **Expected output:**
+
+| order_id | customer_id | service_type | order_amount | migration_status |
+|---|---:|---|---:|---|
+| 1004 | 204 | Residential | 95 | NULL |
+| 1005 | 205 | Commercial | 300 | NULL |
+| 1006 | 206 | Residential | 75 | Failed |
+
+## **Business interpretation**
+- Order 1004 is missing from Salesforce.
+- Order 1005 is missing from Salesforce.
+- Order 1006 exists in Salesforce but failed migration.
+The IT Business Analyst should investigate these records, determine whether the failures are caused by mapping issues, validation errors, or integration problems, and coordinate retesting before deployment.
+
 
 
