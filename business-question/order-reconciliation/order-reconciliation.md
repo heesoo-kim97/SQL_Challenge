@@ -2,7 +2,7 @@
 
 ## **Business scenario**
 
-CR&R is integrating its legacy service management system with Salesforce. During testing, the IT team discovers that some service orders appear in one system but not the other.
+Company C is integrating its legacy service management system with Salesforce. During testing, the IT team discovers that some service orders appear in one system but not the other.
 
 You have been asked to compare the two systems and identify service orders that have not successfully transferred into Salesforce.
 
@@ -29,3 +29,11 @@ You have been asked to compare the two systems and identify service orders that 
 | SF005               | 1006     | Failed           |
 | SF006               | 1008     | Completed        |
 
+## **The task**
+
+Write a SQL query to identify all legacy service orders that have **not successfully migrated into Salesforce**.
+
+For this exercise, consider an order unsuccessful if:
+
+1. It does not exist in the Salesforce table.
+2. It exists in Salesforce, but its `migration_status` is not `'Completed'`.
