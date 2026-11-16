@@ -37,3 +37,25 @@ For this exercise, consider an order unsuccessful if:
 
 1. It does not exist in the Salesforce table.
 2. It exists in Salesforce, but its `migration_status` is not `'Completed'`.
+
+## **SQL Solution**
+
+```sql
+
+SELECT
+    l.order_id,
+    l.customer_id,
+    l.service_type,
+    l.order_amount,
+    s.migration_status
+FROM Legacy_Service_Orders l
+LEFT JOIN Salesforce_Service_Orders s
+    ON l.order_id = s.order_id
+WHERE s.order_id IS NULL
+   OR s.migration_status <> 'Completed'
+ORDER BY l.order_id;
+
+```
+
+
+
